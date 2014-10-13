@@ -31,6 +31,8 @@ import uk.ac.dundee.computing.aec.instagrim.stores.Pic;
 /**
  * Servlet implementation class Image
  */
+
+//  Allows these url patterns to use this servlet.
 @WebServlet(urlPatterns = {
     "/Image",
     "/Image/*",
@@ -45,7 +47,6 @@ public class Image extends HttpServlet {
     private static final long serialVersionUID = 1L;
     private Cluster cluster;
     private HashMap CommandsMap = new HashMap();
-    
     
 
     /**
@@ -107,7 +108,6 @@ public class Image extends HttpServlet {
     private void DisplayImage(int type,String Image, HttpServletResponse response) throws ServletException, IOException {
         PicModel tm = new PicModel();
         tm.setCluster(cluster);
-  
         
         Pic p = tm.getPic(type,java.util.UUID.fromString(Image));
         
@@ -136,8 +136,8 @@ public class Image extends HttpServlet {
             int i = is.available();
             HttpSession session=request.getSession();
             LoggedIn lg= (LoggedIn)session.getAttribute("LoggedIn");
-            String username="majed";
-            if (lg.getlogedin()){
+            String username="defaultuser";
+            if (lg.getLoggedIn()){
                 username=lg.getUsername();
             }
             if (i > 0) {

@@ -8,7 +8,6 @@ package uk.ac.dundee.computing.aec.instagrim.servlets;
 
 import com.datastax.driver.core.Cluster;
 import java.io.IOException;
-import java.io.PrintWriter;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
@@ -29,7 +28,6 @@ import uk.ac.dundee.computing.aec.instagrim.stores.LoggedIn;
 public class Login extends HttpServlet {
 
     Cluster cluster=null;
-
 
     public void init(ServletConfig config) throws ServletException {
         // TODO Auto-generated method stub
@@ -57,8 +55,8 @@ public class Login extends HttpServlet {
         HttpSession session=request.getSession();
         System.out.println("Session in servlet "+session);
         if (isValid){
-            LoggedIn lg= new LoggedIn();
-            lg.setLogedin();
+            LoggedIn lg = new LoggedIn();
+            lg.setLoggedIn();
             lg.setUsername(username);
             //request.setAttribute("LoggedIn", lg);
             
@@ -68,9 +66,8 @@ public class Login extends HttpServlet {
 	    rd.forward(request,response);
             
         }else{
-            response.sendRedirect("/Instagrim/login.jsp");
+            response.sendRedirect("/Instagrim/invalidlogin.jsp");
         }
-        
     }
 
     /**

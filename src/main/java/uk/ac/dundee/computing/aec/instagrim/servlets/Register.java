@@ -31,9 +31,6 @@ public class Register extends HttpServlet {
         cluster = CassandraHosts.getCluster();
     }
 
-
-
-
     /**
      * Handles the HTTP <code>POST</code> method.
      *
@@ -47,13 +44,24 @@ public class Register extends HttpServlet {
             throws ServletException, IOException {
         String username=request.getParameter("username");
         String password=request.getParameter("password");
+        String passwordConf=request.getParameter("passwordConf");
+        String email=request.getParameter("email");
+        String emailConf=request.getParameter("emailConf");
+        String firstname=request.getParameter("firstname");
+        String surname=request.getParameter("surname");
         
-        User us=new User();
-        us.setCluster(cluster);
-        us.RegisterUser(username, password);
-        
-	response.sendRedirect("/Instagrim");
-        
+        if (checkEmail(email, emailConf))
+        {
+            User us=new User();
+            us.setCluster(cluster);
+            us.RegisterUser(username, password, email, firstname, surname);
+            response.sendRedirect("/Instagrim/login.jsp");
+        }
+        else
+        { 
+            response.sendRedirect("/Instagrim/register.jsp");   
+        }
+            
     }
 
     /**
@@ -66,4 +74,15 @@ public class Register extends HttpServlet {
         return "Short description";
     }// </editor-fold>
 
+    public Boolean checkEmail(String email, String emailConf)
+    {
+        if(email.equals(emailConf)){
+            return true; }
+        else
+            {
+                System.out.println("Email addresses do not match"); //Need to make this actually print to screen??
+                return false;
+            }
+    }
+  
 }

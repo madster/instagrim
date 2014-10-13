@@ -1,7 +1,7 @@
 <%-- 
-    Document   : login.jsp
-    Created on : Sep 28, 2014, 12:04:14 PM
-    Author     : Administrator
+    Document   : invalidlogin.jsp
+    Created on : Oct 5, 2014, 3:04:14 PM
+    Author     : Andy Cobley & Maddie Barker
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -13,7 +13,7 @@
         <link rel="stylesheet" type="text/css" href="Styles.css" />
 
     </head>
-    <body>
+    
         <header>
         <h1>InstaGrim ! </h1>
         <h2>Your world in Black and White</h2>
@@ -25,7 +25,7 @@
         </nav>
        
         <article>
-            <h3>Login</h3>
+            <h3><FONT COLOR="#FF0000">Your login details were invalid. Please try again or register as a new user:</FONT></h3>
             <form method="POST"  action="Login">
                 <ul>
                     <li>User Name <input type="text" name="username"></li>
@@ -33,13 +33,16 @@
                 </ul>
                 <br/>
                 <input type="submit" value="Login"> 
-            </form>
-
         </article>
+    
+        <li><a href="/Instagrim/register.jsp">Register as a new user</a></li>
+        
+  
         <footer>
+            
             <ul>
                 <li class="footer"><a href="/Instagrim">Home</a></li>
             </ul>
         </footer>
-    </body>
+    
 </html>

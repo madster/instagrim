@@ -19,8 +19,7 @@
         </header>
         <nav>
             <ul>
-                
-                <li><a href="/Instagrim/Images/majed">Sample Images</a></li>
+                <li><a href="/Instagrim/Images/sample">Sample Images</a></li>
             </ul>
         </nav>
        
@@ -30,9 +29,14 @@
                 <ul>
                     <li>User Name <input type="text" name="username"></li>
                     <li>Password <input type="password" name="password"></li>
+                    <li>Confirm Password <input type="password" name="passwordConf"></li>
+                    <li>E-mail address <input type="text" name="email"></li>
+                    <li>Confirm e-mail address <input type="text" name="email"></li>
+                    <li>First name <input type="text" name="firstname"></li>
+                    <li>Surname <input type="text" name="surname"></li>
                 </ul>
                 <br/>
-                <input type="submit" value="Regidter"> 
+                <input type="submit" value="Register"> 
             </form>
 
         </article>
