@@ -14,8 +14,11 @@ import com.datastax.driver.core.ResultSet;
 import com.datastax.driver.core.Row;
 import com.datastax.driver.core.Session;
 import java.io.UnsupportedEncodingException;
+import java.util.LinkedList;
 import java.nio.ByteBuffer;
 import java.security.NoSuchAlgorithmException;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import uk.ac.dundee.computing.aec.instagrim.lib.AeSimpleSHA1;
 import uk.ac.dundee.computing.aec.instagrim.lib.Convertors;
 import uk.ac.dundee.computing.aec.instagrim.stores.Pic;
@@ -23,9 +26,9 @@ import uk.ac.dundee.computing.aec.instagrim.stores.Pic;
 /**
  * @author Administrator
  */
-public class User {
+public class UserModel {
     Cluster cluster;
-    public User(){
+    public UserModel(){
         
     }
     
@@ -88,33 +91,30 @@ public class User {
         }
         return EncodedPassword;
     }
-
-    public java.util.LinkedList<User> getUserInfo(String username) {
-        java.util.LinkedList<User> Users = new java.util.LinkedList<>();
-        
-        try (Session session = cluster.connect("instagrim")) {
-            try {
-                PreparedStatement ps = session.prepare("select login from userprofiles where username =?");
-                BoundStatement bs = new BoundStatement(ps);
-                ResultSet rs = session.execute( // this is where the query is executed
-                        bs.bind(username)); // here you are binding the 'boundStatement'
+    
+    public LinkedList<String> getInfoForUser(String User) {
+        LinkedList<String> userInfo = new LinkedList<>();
+        Session session = cluster.connect("instagrim");
+        PreparedStatement ps = session.prepare("select * from userprofiles where login =?");
+        ResultSet rs = null;
+        BoundStatement boundStatement = new BoundStatement(ps);
+        rs = session.execute( // this is where the query is executed
+                boundStatement.bind( // here you are binding the 'boundStatement'
+                        User));
+        if (rs.isExhausted()) {
+            System.out.println("No details returned");
+            return null;
+        } else {
+            for (Row row : rs) {
+                String username = row.getString("login");
+                String firstName = row.getString("firstname");
+                String surname = row.getString("surname");
+                userInfo.push(username);
+                userInfo.push(firstName);
+                userInfo.push(surname);
                 
-                if (rs.isExhausted()) {
-                    System.out.println("No info returned");
-                    return null;
-                }
-                else {
-                    for (Row row : rs)
-                    {
-                        
-                    }
-                }
-            } catch (Exception et) {
-                System.out.println("Can't get info " + et);
-                return null;
             }
-            session.close();
-        } 
-        return Users;
+        }
+        return userInfo;
     }
 }

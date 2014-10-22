@@ -47,7 +47,7 @@ public class Image extends HttpServlet {
     private static final long serialVersionUID = 1L;
     private Cluster cluster;
     private HashMap CommandsMap = new HashMap();
-    
+  
 
     /**
      * @see HttpServlet#HttpServlet()
@@ -71,7 +71,6 @@ public class Image extends HttpServlet {
      * response)
      */
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        // TODO Auto-generated method stub
         String args[] = Convertors.SplitRequestPath(request);
         int command;
         try {
@@ -156,12 +155,12 @@ public class Image extends HttpServlet {
 
     }
 
-    private void error(String mess, HttpServletResponse response) throws ServletException, IOException {
+    private void error(String errorMsg, HttpServletResponse response) throws ServletException, IOException {
 
         PrintWriter out = null;
         out = new PrintWriter(response.getOutputStream());
         out.println("<h1>You have a na error in your input</h1>");
-        out.println("<h2>" + mess + "</h2>");
+        out.println("<h2>" + errorMsg + "</h2>");
         out.close();
         return;
     }
