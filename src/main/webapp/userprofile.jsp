@@ -30,19 +30,20 @@
 
         <article>
             <h1>Your Profile</h1>
-
-            <%-- Put in link to user info, i.e.:
-                 Username: + $username
-                 Email: + $email --%>
             
-            <p> Username:     <% LoggedIn lg = (LoggedIn) session.getAttribute("LoggedIn");
-                                 String username = lg.getUsername(); 
-                                 out.println(username);       %>
-                Name:         <% String firstName = lg.getUsername();   /// SORT THIS
-                                 out.println(username);   
-                %>   
+            <% LoggedIn lg = (LoggedIn) session.getAttribute("LoggedIn");
+                                 if (lg.getLoggedIn() == true) 
+                                 { %>
+                                 <p> Username: <% String username = lg.getUsername();
+                                     out.println(username); %>
+                                     Name: <%  String firstName = lg.getUsername();   /// SORT THIS
+                                     out.println(firstName);   }
+                                else
+                                { %>
+                                     You are not logged in. Please log in to see your profile.
+                             <% } %>
+                                 
             </p>
-
 
         </article>
         <footer>

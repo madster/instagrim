@@ -25,7 +25,7 @@ public final class Keyspaces {
                     + " processed blob,"
                     + " imagelength int,"
                     + " thumblength int,"
-                    + "  processedlength int,"
+                    + " processedlength int,"
                     + " type  varchar,"
                     + " name  varchar,"
                     + " PRIMARY KEY (picid)"
@@ -44,8 +44,8 @@ public final class Keyspaces {
             String CreateUserProfile = "CREATE TABLE if not exists instagrim.userprofiles (\n"
                     + "      login text PRIMARY KEY,\n"
                      + "     password text,\n"
-                    + "      first_name text,\n"
-                    + "      last_name text,\n"
+                    + "      firstname text,\n"
+                    + "      surname text,\n"
                     + "      email set<text>,\n"
                     + "      addresses  map<text, frozen <address>>\n"
                     + "  );";
@@ -69,7 +69,7 @@ public final class Keyspaces {
                 SimpleStatement cqlQuery = new SimpleStatement(CreatePicTable);
                 session.execute(cqlQuery);
             } catch (Exception et) {
-                System.out.println("Can't create tweet table " + et);
+                System.out.println("Can't create pic table " + et);
             }
             System.out.println("" + Createuserpiclist);
 
@@ -96,7 +96,7 @@ public final class Keyspaces {
             session.close();
 
         } catch (Exception et) {
-            System.out.println("Other keyspace or coulm definition error" + et);
+            System.out.println("Other keyspace or column definition error" + et);
         }
 
     }

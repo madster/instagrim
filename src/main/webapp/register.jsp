@@ -28,10 +28,26 @@
             <form method="POST"  action="Register">
                 <ul>
                     <li>User Name <input type="text" name="username"></li>
-                    <li>Password <input type="password" name="password"></li>
-                    <li>Confirm Password <input type="password" name="passwordConf"></li>
-                    <li>E-mail address <input type="text" name="email"></li>
-                    <li>Confirm e-mail address <input type="text" name="email"></li>
+                    
+                    
+                    <form  name="pwdCheck" onsubmit="return false">
+                    <li>Password <input type="password" name="pwd1" id="pwd1"></li>
+                    <li>Confirm Password <input type="password" name="pwd2" id="pwd2">
+                    </form>
+                    <div id="pwdMsg"></div> 
+                    <script src="CheckOnEnter.js"></script> 
+                    </li>
+                    
+                    
+                    <form  name="emailCheck" onsubmit="return false">
+                    <li>Email address <input type="text" name="email" id="email1"></li>
+                    <li>Confirm Email <input type="text" name="email2" id="email2">
+                    </form>
+                    <div id="emailMsg"></div> 
+                    <script src="CheckOnEnter.js"></script> 
+                    </li>
+                  
+                    
                     <li>First name <input type="text" name="firstname"></li>
                     <li>Surname <input type="text" name="surname"></li>
                 </ul>

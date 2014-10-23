@@ -39,6 +39,7 @@ public class UserProfile extends HttpServlet {
         super();
         // TODO Auto-generated constructor stub
         CommandsMap.put("Profile",1);
+        
     }
    
    public void init(ServletConfig config) throws ServletException {

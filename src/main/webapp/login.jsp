@@ -4,6 +4,7 @@
     Author     : Administrator
 --%>
 
+<%@page import="uk.ac.dundee.computing.aec.instagrim.stores.LoggedIn"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -26,6 +27,7 @@
        
         <article>
             <h3>Login</h3>
+            
             <form method="POST"  action="Login">
                 <ul>
                     <li>User Name <input type="text" name="username"></li>
