@@ -99,9 +99,7 @@ public class UserModel {
         PreparedStatement ps = session.prepare("select * from userprofiles where login =?");
         ResultSet rs = null;
         BoundStatement boundStatement = new BoundStatement(ps);
-        rs = session.execute( // this is where the query is executed
-                boundStatement.bind( // here you are binding the 'boundStatement'
-                        User));
+        rs = session.execute(boundStatement.bind(User));
         if (rs.isExhausted()) {
             System.out.println("No details returned");
             return null;

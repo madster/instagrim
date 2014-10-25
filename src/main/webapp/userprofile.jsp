@@ -29,22 +29,10 @@
         </nav>
 
         <article>
-            <h1>Your Profile</h1>
-            
-            <% LoggedIn lg = (LoggedIn) session.getAttribute("LoggedIn");
-                                 if (lg.getLoggedIn() == true) 
-                                 { %>
-                                 <p> Username: <% String username = lg.getUsername();
-                                     out.println(username); %>
-                                     Name: <%  String firstName = lg.getUsername();   /// SORT THIS
-                                     out.println(firstName);   }
-                                else
-                                { %>
-                                     You are not logged in. Please log in to see your profile.
-                             <% } %>
-                                 
-            </p>
+            <h1>${User.get(2)}'s Profile</h1>                           
 
+            <li><b>First name:  </b>${User.get(1)}</li>
+            <li><b>Surname:     </b>${User.get(0)}</li>
         </article>
         <footer>
             <ul>

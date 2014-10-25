@@ -28,12 +28,11 @@ import uk.ac.dundee.computing.aec.instagrim.stores.LoggedIn;
 
 public class Login extends HttpServlet 
 {
-    Cluster cluster;
+    Cluster cluster=null;
     String errorMsg;
     
     public Login()
     {
-         cluster=null;
          String errorMsg = null;
     }
     public void init(ServletConfig config) throws ServletException {
@@ -56,12 +55,15 @@ public class Login extends HttpServlet
         String username=request.getParameter("username");
         String password=request.getParameter("password");
         
-        UserModel us=new UserModel();
-        us.setCluster(cluster);
-        boolean isValid=us.IsValidUser(username, password);
-        HttpSession session=request.getSession();
-        System.out.println("Session in servlet "+session);
-        if (isValid){
+        
+        if (!username.equals("") && !password.equals(""))
+        {
+            UserModel us=new UserModel();
+            us.setCluster(cluster);
+            boolean isValid=us.IsValidUser(username, password);
+            HttpSession session=request.getSession();
+            System.out.println("Session in servlet "+session);
+            
             LoggedIn lg = new LoggedIn();
             lg.setLoggedIn();
             lg.setUsername(username);
@@ -71,8 +73,9 @@ public class Login extends HttpServlet
             System.out.println("Session in servlet "+session);
             RequestDispatcher rd=request.getRequestDispatcher("index.jsp");
 	    rd.forward(request,response);
-            
-        }else{
+        }
+        else
+        {
             errorMsg = "Invalid login. Please try again or register as a new user."; 
             request.setAttribute("errorMsg", errorMsg);
             RequestDispatcher rd = request.getRequestDispatcher("/login.jsp");

@@ -24,8 +24,6 @@ import uk.ac.dundee.computing.aec.instagrim.stores.Pic;
 @WebServlet(urlPatterns = {
     "/Profile",
     "/Profile/*",
-    "/profile",
-    "/profile/*"
 })
 @MultipartConfig
 
