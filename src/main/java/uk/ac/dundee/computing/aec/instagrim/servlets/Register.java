@@ -24,9 +24,20 @@ import uk.ac.dundee.computing.aec.instagrim.models.UserModel;
  * @author Administrator
  */
 @WebServlet(name = "Register", urlPatterns = {"/Register"})
-public class Register extends HttpServlet {
-    Cluster cluster=null;
-    public void init(ServletConfig config) throws ServletException {
+
+public class Register extends HttpServlet 
+{
+    String errorMsg = null;
+    Cluster cluster = null;
+            
+    /*public Register()
+    {
+        errorMsg = null;
+        us = new UserModel();
+    }*/
+    
+    public void init(ServletConfig config) throws ServletException 
+    {
         // TODO Auto-generated method stub
         cluster = CassandraHosts.getCluster();
     }
@@ -40,28 +51,62 @@ public class Register extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException 
+    {
         String username=request.getParameter("username");
         String password=request.getParameter("password");
-        String passwordConf=request.getParameter("passwordConf");
+        String password2=request.getParameter("password2");
         String email=request.getParameter("email");
-        String emailConf=request.getParameter("emailConf");
+        String email2=request.getParameter("email2");
         String firstname=request.getParameter("firstname");
         String surname=request.getParameter("surname");
         
-        if (checkEmail(email, emailConf))
-        {
-            UserModel us=new UserModel();
-            us.setCluster(cluster);
-            us.RegisterUser(username, password, email, firstname, surname);
-            response.sendRedirect("/Instagrim/login.jsp");
-        }
-        else
+        UserModel us = new UserModel();
+        us.setCluster(cluster);
+             
+        if (username.equals("") || password.equals("") || password2.equals("") || email.equals("") || email2.equals("") || firstname.equals("") || surname.equals(""))
         { 
-            response.sendRedirect("/Instagrim/register.jsp");   
+            errorMsg = "A field was not completed. Please complete all fields and re-submit."; 
+            request.setAttribute("errorMsg", errorMsg);
+            RequestDispatcher rd = request.getRequestDispatcher("/register.jsp");
+            rd.forward(request, response);
         }
-            
+        else if (!email.equals(email2) && password.equals(password2))
+        { 
+            errorMsg = "Email addresses entered do not match. Please try again.";
+            request.setAttribute("errorMsg", errorMsg);
+            RequestDispatcher rd = request.getRequestDispatcher("/register.jsp");
+            rd.forward(request, response);
+        }     
+        else if (!password.equals(password2) && email.equals(email2))
+        { 
+            errorMsg = "Passwords entered do not match. Please try again."; 
+            request.setAttribute("errorMsg", errorMsg);
+            RequestDispatcher rd = request.getRequestDispatcher("/register.jsp");
+            rd.forward(request, response);
+
+        }    
+        else if (!password.equals(password2) && !email.equals(email2))
+        { 
+            errorMsg = "Email addresses entered do not match. Passwords entered also do not match. Please try again."; 
+            request.setAttribute("errorMsg", errorMsg);
+            RequestDispatcher rd = request.getRequestDispatcher("/register.jsp");
+            rd.forward(request, response);
+        }    
+        
+        else if (us.isLoginTaken(username))
+        {
+            errorMsg = "Username is already taken. Please try again with another username."; 
+            request.setAttribute("errorMsg", errorMsg);
+            RequestDispatcher rd = request.getRequestDispatcher("/register.jsp");
+            rd.forward(request, response);
+        }
+        
+        else if (checkIfSame(email, email2) && checkIfSame(password, password2))
+        {
+            us.RegisterUser(username, password, email, firstname, surname);
+            response.sendRedirect("/Instagrim");
+        }
     }
 
     /**
@@ -74,15 +119,13 @@ public class Register extends HttpServlet {
         return "Short description";
     }// </editor-fold>
 
-    public Boolean checkEmail(String email, String emailConf)
+    public Boolean checkIfSame(String check1, String check2)
     {
-        if(email.equals(emailConf)){
-            return true; }
+        if(check1.equals(check2))
+            return true; 
         else
-            {
-                System.out.println("Email addresses do not match"); //Need to make this actually print to screen??
-                return false;
-            }
+            return false;
     }
-  
+ 
+    
 }

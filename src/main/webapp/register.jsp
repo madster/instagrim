@@ -11,6 +11,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Instagrim</title>
         <link rel="stylesheet" type="text/css" href="Styles.css" />
+        <!--<script src="CheckOnEnter.js"></script>-->
     </head>
     <body>
         <header>
@@ -21,41 +22,35 @@
             <ul>
                 <li><a href="/Instagrim/Images/sample">Sample Images</a></li>
             </ul>
-        </nav>
-       
-        <article>
-            <h3>Register as user</h3>
+        </nav>   
+        
+        <h3><font color="red">${errorMsg}</font></h3>
+            <h4>Register as user</h4>
             <form method="POST"  action="Register">
                 <ul>
                     <li>User Name <input type="text" name="username"></li>
                     
-                    
-                    <form  name="pwdCheck" onsubmit="return false">
-                    <li>Password <input type="password" name="pwd1" id="pwd1"></li>
-                    <li>Confirm Password <input type="password" name="pwd2" id="pwd2">
-                    </form>
+                    <!-- <form  name="pwdCheck" onsubmit="return false"> -->
+                    <li>Password <input type="password" name="password" id="password"></li>
+                    <li>Confirm Password <input type="password" name="password2" id="password2"></li>
+                    <!--</form> -->
                     <div id="pwdMsg"></div> 
-                    <script src="CheckOnEnter.js"></script> 
-                    </li>
                     
                     
-                    <form  name="emailCheck" onsubmit="return false">
-                    <li>Email address <input type="text" name="email" id="email1"></li>
-                    <li>Confirm Email <input type="text" name="email2" id="email2">
-                    </form>
-                    <div id="emailMsg"></div> 
-                    <script src="CheckOnEnter.js"></script> 
-                    </li>
-                  
+                    <!--<div id="emailCheck" onsubmit="return false">-->
+                    <li>Email Address <input type="text" name="email" id="email"></li>
+                    <li>Confirm Email <input type="text" name="email2" id="email2"></li>
+                    <!--</form>-->
+                    <!--<div id="emailMsg"></div> -->
                     
-                    <li>First name <input type="text" name="firstname"></li>
+                    <li>First Name <input type="text" name="firstname"></li>
                     <li>Surname <input type="text" name="surname"></li>
                 </ul>
                 <br/>
                 <input type="submit" value="Register"> 
             </form>
 
-        </article>
+        
         <footer>
             <ul>
                 <li class="footer"><a href="/Instagrim">Home</a></li>

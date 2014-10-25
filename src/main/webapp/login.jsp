@@ -26,7 +26,8 @@
         </nav>
        
         <article>
-            <h3>Login</h3>
+            <h3><font color="red">${errorMsg}</font></h3>
+            <h4>Login</h4>
             
             <form method="POST"  action="Login">
                 <ul>

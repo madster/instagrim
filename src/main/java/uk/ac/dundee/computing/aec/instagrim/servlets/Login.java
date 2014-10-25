@@ -25,10 +25,17 @@ import uk.ac.dundee.computing.aec.instagrim.stores.LoggedIn;
  * @author Administrator
  */
 @WebServlet(name = "Login", urlPatterns = {"/Login"})
-public class Login extends HttpServlet {
 
-    Cluster cluster=null;
-
+public class Login extends HttpServlet 
+{
+    Cluster cluster;
+    String errorMsg;
+    
+    public Login()
+    {
+         cluster=null;
+         String errorMsg = null;
+    }
     public void init(ServletConfig config) throws ServletException {
         // TODO Auto-generated method stub
         cluster = CassandraHosts.getCluster();
@@ -66,7 +73,10 @@ public class Login extends HttpServlet {
 	    rd.forward(request,response);
             
         }else{
-            response.sendRedirect("/Instagrim/invalidlogin.jsp");
+            errorMsg = "Invalid login. Please try again or register as a new user."; 
+            request.setAttribute("errorMsg", errorMsg);
+            RequestDispatcher rd = request.getRequestDispatcher("/login.jsp");
+            rd.forward(request, response);
         }
     }
 

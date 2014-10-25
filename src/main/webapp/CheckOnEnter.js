@@ -6,7 +6,7 @@
 
 function pwdCheck() 
 {
-    if (document.getElementById('pwd1').value === document.getElementById('pwd2').value)
+    if (document.getElementById('password').value === document.getElementById('password2').value)
     {	
         document.getElementById('pwdMsg').style.color = "green";
         document.getElementById('pwdMsg').innerHTML = 'Passwords match!';
@@ -17,13 +17,13 @@ function pwdCheck()
         document.getElementById('pwdMsg').style.color = "red";
     }
 }
-    document.getElementById('pwd1').onchange = pwdCheck;
-    document.getElementById('pwd2').onchange = pwdCheck;
+    document.getElementById('password').onchange = pwdCheck;
+    document.getElementById('password2').onchange = pwdCheck;
 
     
 function emailCheck() 
 {
-    if (document.getElementById('email1').value === document.getElementById('email2').value)
+    if (document.getElementById('email').value === document.getElementById('email2').value)
     {	
         document.getElementById('emailMsg').style.color = "green";
         document.getElementById('emailMsg').innerHTML = 'Email addresses match!';
@@ -35,5 +35,5 @@ function emailCheck()
         document.getElementById('emailMsg').style.color = "red";
     }
 }
-    document.getElementById('email1').onchange = emailCheck;
+    document.getElementById('email').onchange = emailCheck;
     document.getElementById('email2').onchange = emailCheck;

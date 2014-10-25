@@ -21,16 +21,17 @@
         </header>
         <nav>
             <ul>
-                <li><a href="upload.jsp">Upload</a></li>
-                    <%
-                        LoggedIn lg = (LoggedIn) session.getAttribute("LoggedIn");
-                        if (lg != null)
-                        {  // if user is logged in
-                            if (lg.getLoggedIn())  // again, if user is logged in
-                            {
-                                String username = lg.getUsername(); %>
+                        <li><a href="upload.jsp">Upload</a></li>
+                        <%
+                            LoggedIn lg = (LoggedIn) session.getAttribute("LoggedIn");
+                            if (lg != null)
+                            {  // if user is logged in
+                                if (lg.getLoggedIn())  // again, if user is logged in
+                                {
+                                    String username = lg.getUsername(); %>
                         <li><a href="/Instagrim/Profile/<%=lg.getUsername()%>">Your Profile</a></li>
                         <li><a href="/Instagrim/Images/<%=lg.getUsername()%>">Your Images</a></li>
+                        
                         <!-- From http://stackoverflow.com/questions/13707225/kill-session-and-redirect-to-login-page-on-click-of-logout-button -->
                         <form action="Logout" method="POST">
                         <input type="submit" value="Logout" />

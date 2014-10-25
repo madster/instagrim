@@ -75,6 +75,7 @@ public class UserModel {
     
     return false;  
     }
+    
        public void setCluster(Cluster cluster) {
         this.cluster = cluster;
     }
@@ -117,4 +118,23 @@ public class UserModel {
         }
         return userInfo;
     }
+    
+    public boolean isLoginTaken(String username)
+    {
+        if (username == null)
+        {
+            return true;
+        }
+        Session session = cluster.connect("instagrim");
+        PreparedStatement ps = session.prepare("select login from userprofiles where login =?");
+        ResultSet rs = null;
+        BoundStatement boundStatement = new BoundStatement(ps);
+        rs = session.execute(boundStatement.bind(username));
+        
+        if (rs.one() == null) 
+            return false;
+        else
+            return true;
+        }
+    
 }
