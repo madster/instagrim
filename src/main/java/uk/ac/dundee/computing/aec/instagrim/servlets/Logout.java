@@ -6,6 +6,7 @@
 package uk.ac.dundee.computing.aec.instagrim.servlets;
 
 import java.io.IOException;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.*;
@@ -31,7 +32,11 @@ public class Logout extends HttpServlet {
      */
         protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.getSession().invalidate();
-        response.sendRedirect(request.getContextPath() + "/logout.jsp");
+       // response.sendRedirect(request.getContextPath() + "/index.jsp"); // Removed this since I wanted to show an error message
+        String message = "You have been logged out successfully.";
+        request.setAttribute("message", message);
+        RequestDispatcher rd = request.getRequestDispatcher("index.jsp");
+        rd.forward(request, response);
     }
 
 }

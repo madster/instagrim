@@ -34,6 +34,31 @@
             <li><b>First name:  </b>${User.get(1)}</li>
             <li><b>Surname:     </b>${User.get(0)}</li>
         </article>
+        
+        
+        <article>
+            <a href="/Instagrim/Images/${User.get(2)}">${User.get(2)}'s Pics<a/>
+            
+            <% LinkedList<Pic> lsPics = (LinkedList<Pic>) request.getAttribute("Pics");
+            if (lsPics == null) 
+            { %>
+                <p>No Pictures found</p>
+            <%  
+            } 
+            else
+            {
+                Iterator<Pic> iterator;
+                iterator = lsPics.iterator();
+                while (iterator.hasNext()) 
+                {
+                    Pic p = (Pic) iterator.next(); %>
+                    <a href="/Instagrim/Images/<%=p.getSUUID()%>" ><img src="/Instagrim/Thumb/<%=p.getSUUID()%>"></a><br/>
+                    
+            <%  }
+            }           
+        %>
+        </article>
+        
         <footer>
             <ul>
                 <li class="footer"><a href="/Instagrim">Home</a></li>

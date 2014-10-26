@@ -48,7 +48,7 @@ public class PicModel {
         this.cluster = cluster;
     }
 
-    public void insertPic(byte[] b, String type, String name, String user) {
+    public void insertPic(byte[] b, String type, String name, String user, String picName) {
         try {
             Convertors convertor = new Convertors();
 
@@ -70,13 +70,13 @@ public class PicModel {
             int processedlength=processedb.length;
             Session session = cluster.connect("instagrim");
 
-            PreparedStatement psInsertPic = session.prepare("insert into pics ( picid, image,thumb,processed, user, interaction_time,imagelength,thumblength,processedlength,type,name) values(?,?,?,?,?,?,?,?,?,?,?)");
+            PreparedStatement psInsertPic = session.prepare("insert into pics ( picid, image,thumb,processed, user, interaction_time,imagelength,thumblength,processedlength,type,name, title) values(?,?,?,?,?,?,?,?,?,?,?,?)");
             PreparedStatement psInsertPicToUser = session.prepare("insert into userpiclist ( picid, user, pic_added) values(?,?,?)");
             BoundStatement bsInsertPic = new BoundStatement(psInsertPic);
             BoundStatement bsInsertPicToUser = new BoundStatement(psInsertPicToUser);
 
             Date DateAdded = new Date();
-            session.execute(bsInsertPic.bind(picid, buffer, thumbbuf,processedbuf, user, DateAdded, length,thumblength,processedlength, type, name));
+            session.execute(bsInsertPic.bind(picid, buffer, thumbbuf,processedbuf, user, DateAdded, length,thumblength,processedlength, type, name, picName));
             session.execute(bsInsertPicToUser.bind(picid, user, DateAdded));
             session.close();
 
@@ -223,7 +223,7 @@ public class PicModel {
         if (rs.isExhausted()) 
         {
             System.out.println("No details returned");
-            return null;
+            return "ListEmpty";
         } 
         else 
         {
@@ -238,11 +238,6 @@ public class PicModel {
         int randomNo = r.nextInt(picIDs.size());
         String image = picIDs.get(randomNo);
         return image;
-        
-        //return linked list of picIDs in Model
-        //use random generator to pick one pic ID to display in Model?
-        //return ID and username attached to Servlet
-        //display pic in Servlet should display it
     }
     
 }

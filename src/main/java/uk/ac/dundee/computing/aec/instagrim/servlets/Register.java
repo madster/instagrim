@@ -69,21 +69,21 @@ public class Register extends HttpServlet
         { 
             errorMsg = "A field was not completed. Please complete all fields and re-submit."; 
             request.setAttribute("errorMsg", errorMsg);
-            RequestDispatcher rd = request.getRequestDispatcher("/register.jsp");
+            RequestDispatcher rd = request.getRequestDispatcher("register.jsp");
             rd.forward(request, response);
         }
         else if (!email.equals(email2) && password.equals(password2))
         { 
             errorMsg = "Email addresses entered do not match. Please try again.";
             request.setAttribute("errorMsg", errorMsg);
-            RequestDispatcher rd = request.getRequestDispatcher("/register.jsp");
+            RequestDispatcher rd = request.getRequestDispatcher("register.jsp");
             rd.forward(request, response);
         }     
         else if (!password.equals(password2) && email.equals(email2))
         { 
             errorMsg = "Passwords entered do not match. Please try again."; 
             request.setAttribute("errorMsg", errorMsg);
-            RequestDispatcher rd = request.getRequestDispatcher("/register.jsp");
+            RequestDispatcher rd = request.getRequestDispatcher("register.jsp");
             rd.forward(request, response);
 
         }    
@@ -91,7 +91,7 @@ public class Register extends HttpServlet
         { 
             errorMsg = "Email addresses entered do not match. Passwords entered also do not match. Please try again."; 
             request.setAttribute("errorMsg", errorMsg);
-            RequestDispatcher rd = request.getRequestDispatcher("/register.jsp");
+            RequestDispatcher rd = request.getRequestDispatcher("register.jsp");
             rd.forward(request, response);
         }    
         
@@ -99,14 +99,15 @@ public class Register extends HttpServlet
         {
             errorMsg = "Username is already taken. Please try again with another username."; 
             request.setAttribute("errorMsg", errorMsg);
-            RequestDispatcher rd = request.getRequestDispatcher("/register.jsp");
+            RequestDispatcher rd = request.getRequestDispatcher("register.jsp");
             rd.forward(request, response);
         }
         
         else if (checkIfSame(email, email2) && checkIfSame(password, password2))
         {
             us.RegisterUser(username, password, email, firstname, surname);
-            response.sendRedirect("/Instagrim");
+            errorMsg = "<h3> Login " + username + " has been created. Please login below. <h3>";
+            response.sendRedirect("login.jsp");
         }
     }
 

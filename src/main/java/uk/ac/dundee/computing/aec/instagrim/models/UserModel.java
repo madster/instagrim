@@ -62,7 +62,7 @@ public class UserModel {
                 boundStatement.bind( // here you are binding the 'boundStatement'
                         username));
         if (rs.isExhausted()) {
-            System.out.println("No Images returned");
+            System.out.println("No Users returned");
             return false;
         } else {
             for (Row row : rs) {

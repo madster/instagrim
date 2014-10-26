@@ -62,24 +62,30 @@ public class Login extends HttpServlet
             UserModel us=new UserModel();
             us.setCluster(cluster);
             boolean isValid=us.IsValidUser(username, password);
-            HttpSession session=request.getSession();
-            System.out.println("Session in servlet "+session);
             
-            LoggedIn lg = new LoggedIn();
-            lg.setLoggedIn();
-            lg.setUsername(username);
-            //request.setAttribute("LoggedIn", lg);
-            
-            session.setAttribute("LoggedIn", lg);
-            System.out.println("Session in servlet "+session);
-            RequestDispatcher rd=request.getRequestDispatcher("index.jsp");
-	    rd.forward(request,response);
+                HttpSession session=request.getSession();
+                System.out.println("Session in servlet "+session);
+
+                LoggedIn lg = new LoggedIn();
+                lg.setLoggedIn();
+                lg.setUsername(username);
+                //request.setAttribute("LoggedIn", lg);
+
+                session.setAttribute("LoggedIn", lg);
+                System.out.println("Session in servlet "+session);
+
+                String message = "You are logged in as: " + lg.getUsername(); 
+                request.setAttribute("message", message);
+                RequestDispatcher rd = request.getRequestDispatcher("index.jsp");
+                rd.forward(request, response);
+           
+             
         }
         else
         {
-            errorMsg = "Invalid login. Please try again or register as a new user."; 
+            errorMsg = "Username and/or password were incorrect. Please try again or register as a new user."; 
             request.setAttribute("errorMsg", errorMsg);
-            RequestDispatcher rd = request.getRequestDispatcher("/login.jsp");
+            RequestDispatcher rd = request.getRequestDispatcher("login.jsp");
             rd.forward(request, response);
         }
     }

@@ -7,6 +7,8 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page import="uk.ac.dundee.computing.aec.instagrim.stores.*" %>
+<%@page import="uk.ac.dundee.computing.aec.instagrim.servlets.Logout" %>
+
 <!DOCTYPE html>
 <html>
     <head>
@@ -21,28 +23,30 @@
         </header>
         <nav>
             <ul>
-                        <li><a href="upload.jsp">Upload</a></li>
+                     
+                        <li><a href="/Instagrim/upload.jsp">Upload</a></li>
                         <li><a href="/Instagrim/Random">Random Image</a></li>
                         <%
                             LoggedIn lg = (LoggedIn) session.getAttribute("LoggedIn");
                             if (lg != null)
                             {  // if user is logged in
-                                if (lg.getLoggedIn())  // again, if user is logged in
-                                {
+                                if (lg.getLoggedIn())
+                                {  // again, if user is logged in
                                     String username = lg.getUsername(); %>
-                        <li><a href="/Instagrim/Profile/<%=lg.getUsername()%>">Your Profile</a></li>
-                        <li><a href="/Instagrim/Images/<%=lg.getUsername()%>">Your Images</a></li>
                         
-                        <!-- From http://stackoverflow.com/questions/13707225/kill-session-and-redirect-to-login-page-on-click-of-logout-button -->
-                        <form action="Logout" method="POST">
-                        <input type="submit" value="Logout" />
-                        </form>
-                        <%  }
+                                    <li><a href="/Instagrim/Profile/<%=lg.getUsername()%>">Your Profile</a></li>
+                                    <li><a href="/Instagrim/Images/<%=lg.getUsername()%>">Your Images</a></li>
+                        
+                                    <form action="Logout" method="POST">
+                                    <input type="submit" value="Logout" />
+                                    </form>
+                            <%  }
                         } 
                         else
                         {%>
-                            <li><a href="register.jsp">Register</a></li>
-                            <li><a href="login.jsp">Login</a></li>
+                        <font color="#00FF00"> <h3>${message}</h3> </font>
+                            <li><a href="/Instagrim/register.jsp">Register</a></li>
+                            <li><a href="/Instagrim/login.jsp">Login</a></li>
                             
                        <%}%>
             </ul>

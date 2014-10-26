@@ -29,23 +29,24 @@
         </nav>
  
         <article>
-            <h1>User's Pics</h1>
+            <h1>${User.get(2)}'s Pics</h1>
             
-            <% java.util.LinkedList<Pic> lsPics = (java.util.LinkedList<Pic>) request.getAttribute("Pics");
-            if (lsPics == null) { %>
-                <p>No Pictures found</p>
-        <%
-        } 
-            else 
-            {
-                Iterator<Pic> iterator;
-                iterator = lsPics.iterator();
-                while (iterator.hasNext()) 
-                {
-                    Pic p = (Pic) iterator.next();
+            <%
+            LinkedList<Pic> lsPics = (LinkedList<Pic>) request.getAttribute("Pics");
+            if (lsPics == null) {
         %>
-                    <a href="/Instagrim/Image/<%=p.getSUUID()%>" ><img src="/Instagrim/Thumb/<%=p.getSUUID()%>"></a><br/><%
-                }
+        <p>No Pictures found</p>
+        <%
+        } else {
+            Iterator<Pic> iterator;
+            iterator = lsPics.iterator();
+            while (iterator.hasNext()) {
+                Pic p = (Pic) iterator.next();
+
+        %>
+        <a href="/Instagrim/Image/<%=p.getSUUID()%>" ><img src="/Instagrim/Thumb/<%=p.getSUUID()%>"></a><br/><%
+
+            }
             }
         %>
         </article>
