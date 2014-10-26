@@ -28,15 +28,13 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.ByteBuffer;
-import java.util.Date;
-import java.util.LinkedList;
+import java.util.*;
 import javax.imageio.ImageIO;
 import static org.imgscalr.Scalr.*;
 import org.imgscalr.Scalr.Method;
 
 import uk.ac.dundee.computing.aec.instagrim.lib.*;
 import uk.ac.dundee.computing.aec.instagrim.stores.Pic;
-//import uk.ac.dundee.computing.aec.stores.TweetStore;
 
 public class PicModel {
 
@@ -126,14 +124,14 @@ public class PicModel {
         return pad(img, 2);
     }
     
-   public static BufferedImage createProcessed(BufferedImage img) {
+    public static BufferedImage createProcessed(BufferedImage img) {
         int Width=img.getWidth()-1;
         img = resize(img, Method.SPEED, Width, OP_ANTIALIAS, OP_GRAYSCALE);
         return pad(img, 4);
     }
    
-    public java.util.LinkedList<Pic> getPicsForUser(String User) {
-        java.util.LinkedList<Pic> Pics = new java.util.LinkedList<>();
+    public LinkedList<Pic> getPicsForUser(String User) {
+        LinkedList<Pic> Pics = new java.util.LinkedList<>();
         Session session = cluster.connect("instagrim");
         PreparedStatement ps = session.prepare("select picid from userpiclist where user =?");
         ResultSet rs = null;
@@ -156,7 +154,7 @@ public class PicModel {
         return Pics;
     }
 
-    public Pic getPic(int image_type, java.util.UUID picid) {
+    public Pic getPic(int image_type, UUID picid) {
         Session session = cluster.connect("instagrim");
         ByteBuffer bImage = null;
         String type = null;
@@ -212,4 +210,39 @@ public class PicModel {
 
     }
 
+     
+    public String generateRandomImage()
+    {
+        UUID picID = null;
+        LinkedList<String> picIDs = new LinkedList<>();
+        Session session = cluster.connect("instagrim");
+        PreparedStatement ps = session.prepare("select picid from pics");
+        ResultSet rs = null;
+        BoundStatement boundStatement = new BoundStatement(ps);
+        rs = session.execute(boundStatement.bind());
+        if (rs.isExhausted()) 
+        {
+            System.out.println("No details returned");
+            return null;
+        } 
+        else 
+        {
+            for (Row row : rs) 
+            {
+                picID = row.getUUID("picid");
+                picIDs.push(picID.toString());
+            }
+        }
+        
+        Random r = new Random();
+        int randomNo = r.nextInt(picIDs.size());
+        String image = picIDs.get(randomNo);
+        return image;
+        
+        //return linked list of picIDs in Model
+        //use random generator to pick one pic ID to display in Model?
+        //return ID and username attached to Servlet
+        //display pic in Servlet should display it
+    }
+    
 }

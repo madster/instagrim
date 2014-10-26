@@ -1,6 +1,6 @@
 <%-- 
-    Document   : UsersPics
-    Created on : Sep 24, 2014, 2:52:48 PM
+    Document   : userprofile
+    Created on : 
     Author     : Administrator
 --%>
 <%@page import="java.util.*"%>
@@ -24,7 +24,7 @@
         <nav>
             <ul>
                 <li class="nav"><a href="/Instagrim/upload.jsp">Upload</a></li>
-                <li class="nav"><a href="/Instagrim/Images/sample">Sample Images</a></li>
+                <li class="nav"><a href="/Instagrim/Random">Random Image</a></li>
             </ul>
         </nav>
 

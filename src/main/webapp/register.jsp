@@ -20,7 +20,7 @@
         </header>
         <nav>
             <ul>
-                <li><a href="/Instagrim/Images/sample">Sample Images</a></li>
+                <li><a href="/Instagrim/Images/Random">Random Image</a></li>
             </ul>
         </nav>   
         

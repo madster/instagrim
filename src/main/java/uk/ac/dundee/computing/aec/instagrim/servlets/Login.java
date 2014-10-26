@@ -54,8 +54,9 @@ public class Login extends HttpServlet
         
         String username=request.getParameter("username");
         String password=request.getParameter("password");
+        username = username.toLowerCase();
         
-        
+        // Check username and password are not left blank
         if (!username.equals("") && !password.equals(""))
         {
             UserModel us=new UserModel();

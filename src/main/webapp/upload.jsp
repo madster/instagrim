@@ -18,7 +18,7 @@
         <nav>
             <ul>
                 <li class="nav"><a href="upload.jsp">Upload</a></li>
-                <li class="nav"><a href="/Instagrim/Images/sample">Sample Images</a></li>
+                <li class="nav"><a href="/Instagrim/Random">Random Images</a></li>
             </ul>
         </nav>
  

@@ -54,6 +54,7 @@ public class Register extends HttpServlet
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException 
     {
         String username=request.getParameter("username");
+        username = username.toLowerCase();
         String password=request.getParameter("password");
         String password2=request.getParameter("password2");
         String email=request.getParameter("email");

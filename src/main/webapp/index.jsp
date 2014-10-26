@@ -22,6 +22,7 @@
         <nav>
             <ul>
                         <li><a href="upload.jsp">Upload</a></li>
+                        <li><a href="/Instagrim/Random">Random Image</a></li>
                         <%
                             LoggedIn lg = (LoggedIn) session.getAttribute("LoggedIn");
                             if (lg != null)
@@ -42,6 +43,7 @@
                         {%>
                             <li><a href="register.jsp">Register</a></li>
                             <li><a href="login.jsp">Login</a></li>
+                            
                        <%}%>
             </ul>
         </nav>

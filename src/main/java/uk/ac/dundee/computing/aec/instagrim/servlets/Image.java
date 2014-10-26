@@ -38,7 +38,8 @@ import uk.ac.dundee.computing.aec.instagrim.stores.Pic;
     "/Image/*",
     "/Thumb/*",
     "/Images",
-    "/Images/*"
+    "/Images/*",
+    "/Random"
 })
 @MultipartConfig
 
@@ -58,6 +59,8 @@ public class Image extends HttpServlet {
         CommandsMap.put("Image", 1);
         CommandsMap.put("Images", 2);
         CommandsMap.put("Thumb", 3);
+        CommandsMap.put("Random", 4);
+        
 
     }
 
@@ -67,11 +70,11 @@ public class Image extends HttpServlet {
     }
 
     /**
-     * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
-     * response)
+     * @param request, response
+     * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
      */
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String args[] = Convertors.SplitRequestPath(request);
+        String args[] = Convertors.SplitRequestPath(request); // gets URL and splits it up where the obliques/ are. Instagrim = args[0], Images = [1], User = args[2]
         int command;
         try {
             command = (Integer) CommandsMap.get(args[1]);
@@ -89,6 +92,9 @@ public class Image extends HttpServlet {
             case 3:
                 DisplayImage(Convertors.DISPLAY_THUMB,args[2],  response);
                 break;
+            case 4:
+                String Image = generatePicID();
+                DisplayImage(Convertors.DISPLAY_IMAGE, Image,  response);
             default:
                 error("Bad Operator", response);
         }
@@ -98,7 +104,7 @@ public class Image extends HttpServlet {
         PicModel tm = new PicModel();
         tm.setCluster(cluster);
         java.util.LinkedList<Pic> lsPics = tm.getPicsForUser(User);
-        RequestDispatcher rd = request.getRequestDispatcher("/UsersPics.jsp");
+        RequestDispatcher rd = request.getRequestDispatcher("/userspics.jsp");
         request.setAttribute("Pics", lsPics);
         rd.forward(request, response);
 
@@ -124,6 +130,13 @@ public class Image extends HttpServlet {
         out.close();
     }
 
+    private String generatePicID()
+    {
+        PicModel pm = new PicModel();
+        pm.setCluster(cluster);
+        return pm.generateRandomImage();
+    }
+    
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         for (Part part : request.getParts()) {
             System.out.println("Part Name " + part.getName());
@@ -154,6 +167,7 @@ public class Image extends HttpServlet {
         }
 
     }
+   
 
     private void error(String errorMsg, HttpServletResponse response) throws ServletException, IOException {
 
