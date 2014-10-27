@@ -4,17 +4,17 @@
     Author     : Administrator
 --%>
 
-<%@page import="uk.ac.dundee.computing.aec.instagrim.stores.LoggedIn"%>
+<%@page import="uk.ac.dundee.computing.aec.instagrimmjb.stores.LoggedIn"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Instagrim</title>
+        <title>instagrimmjb</title>
         <link rel="stylesheet" type="text/css" href="Styles.css" />
     </head>
     <body>
-        <h1>InstaGrim ! </h1>
+        <h1>instagrimmjb ! </h1>
         <h2>Your world in Black and White</h2>
         <nav>
             <ul>
@@ -26,8 +26,8 @@
                                 {  // again, if user is logged in
                                     String username = lg.getUsername(); %>
                         
-                                    <li><a href="/Instagrim/Profile/<%=lg.getUsername()%>">Your Profile</a></li>
-                                    <li><a href="/Instagrim/Images/<%=lg.getUsername()%>">Your Images</a></li>
+                                    <li><a href="/instagrimmjb/Profile/<%=lg.getUsername()%>">Your Profile</a></li>
+                                    <li><a href="/instagrimmjb/Images/<%=lg.getUsername()%>">Your Images</a></li>
                         
                                     <form action="Logout" method="POST">
                                     <input type="submit" value="Logout" />
@@ -36,12 +36,12 @@
                         } 
                         else
                         {%>
-                            <li><a href="/Instagrim/register.jsp">Register</a></li>
-                            <li><a href="/Instagrim/login.jsp">Login</a></li>
+                            <li><a href="/instagrimmjb/register.jsp">Register</a></li>
+                            <li><a href="/instagrimmjb/login.jsp">Login</a></li>
                             
                        <%}%>
-                <li class="nav"><a href="/Instagrim/upload.jsp">Upload</a></li>
-                <li class="nav"><a href="/Instagrim/Random">Random Images</a></li>
+                <li class="nav"><a href="/instagrimmjb/upload.jsp">Upload</a></li>
+                <li class="nav"><a href="/instagrimmjb/Random">Random Images</a></li>
             </ul>
         </nav>
  
@@ -50,7 +50,7 @@
             <form method="POST" enctype="multipart/form-data" action="Image">
                 File to upload: <input type="file" name="upfile"><br/>
 
-                <br/>
+                
                 Please enter a name for your photo <input type="text" name="picname">
                 <input type="submit" value="Press"> to upload the file!
             </form>
@@ -58,7 +58,7 @@
         </article>
         <footer>
             <ul>
-                <li class="footer"><a href="/Instagrim">Home</a></li>
+                <li class="footer"><a href="/instagrimmjb">Home</a></li>
             </ul>
         </footer>
     </body>

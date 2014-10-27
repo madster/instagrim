@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package uk.ac.dundee.computing.aec.instagrim.servlets;
+package uk.ac.dundee.computing.aec.instagrimmjb.servlets;
 
 import java.io.IOException;
 import javax.servlet.RequestDispatcher;

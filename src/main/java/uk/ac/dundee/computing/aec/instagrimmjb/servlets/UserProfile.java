@@ -1,7 +1,7 @@
 /*
  * Author:  Maddie Barker
  */
-package uk.ac.dundee.computing.aec.instagrim.servlets;
+package uk.ac.dundee.computing.aec.instagrimmjb.servlets;
 
 import com.datastax.driver.core.Cluster;
 import java.io.IOException;
@@ -16,10 +16,10 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import uk.ac.dundee.computing.aec.instagrim.lib.CassandraHosts;
-import uk.ac.dundee.computing.aec.instagrim.lib.Convertors;
-import uk.ac.dundee.computing.aec.instagrim.models.UserModel;
-import uk.ac.dundee.computing.aec.instagrim.stores.Pic;
+import uk.ac.dundee.computing.aec.instagrimmjb.lib.CassandraHosts;
+import uk.ac.dundee.computing.aec.instagrimmjb.lib.Convertors;
+import uk.ac.dundee.computing.aec.instagrimmjb.models.UserModel;
+import uk.ac.dundee.computing.aec.instagrimmjb.stores.Pic;
 
 @WebServlet(urlPatterns = {
     "/Profile",

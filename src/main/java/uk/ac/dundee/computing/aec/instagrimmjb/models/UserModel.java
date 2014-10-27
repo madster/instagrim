@@ -5,7 +5,7 @@
  * Author: Andy Cobley & Maddie Barker   
  */
 
-package uk.ac.dundee.computing.aec.instagrim.models;
+package uk.ac.dundee.computing.aec.instagrimmjb.models;
 
 import com.datastax.driver.core.BoundStatement;
 import com.datastax.driver.core.Cluster;
@@ -19,9 +19,9 @@ import java.nio.ByteBuffer;
 import java.security.NoSuchAlgorithmException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import uk.ac.dundee.computing.aec.instagrim.lib.AeSimpleSHA1;
-import uk.ac.dundee.computing.aec.instagrim.lib.Convertors;
-import uk.ac.dundee.computing.aec.instagrim.stores.Pic;
+import uk.ac.dundee.computing.aec.instagrimmjb.lib.AeSimpleSHA1;
+import uk.ac.dundee.computing.aec.instagrimmjb.lib.Convertors;
+import uk.ac.dundee.computing.aec.instagrimmjb.stores.Pic;
 
 /**
  * @author Administrator
@@ -38,7 +38,7 @@ public class UserModel {
     public boolean RegisterUser(String username, String password, String email, String firstname, String surname)
     {   
         String EncodedPassword=encodePassword(password);
-        Session session = cluster.connect("instagrim");
+        Session session = cluster.connect("instagrimmjb");
         PreparedStatement ps = session.prepare("insert into userprofiles (login, password, email, firstname, surname) Values(?,?,?,?,?)");
        
         BoundStatement boundStatement = new BoundStatement(ps);
@@ -54,7 +54,7 @@ public class UserModel {
     {
         String EncodedPassword=encodePassword(password);
         
-        Session session = cluster.connect("instagrim");
+        Session session = cluster.connect("instagrimmjb");
         PreparedStatement ps = session.prepare("select password from userprofiles where login =?");
         ResultSet rs = null;
         BoundStatement boundStatement = new BoundStatement(ps);
@@ -95,7 +95,7 @@ public class UserModel {
     
     public LinkedList<String> getInfoForUser(String User) {
         LinkedList<String> userInfo = new LinkedList<>();
-        Session session = cluster.connect("instagrim");
+        Session session = cluster.connect("instagrimmjb");
         PreparedStatement ps = session.prepare("select * from userprofiles where login =?");
         ResultSet rs = null;
         BoundStatement boundStatement = new BoundStatement(ps);
@@ -123,7 +123,7 @@ public class UserModel {
         {
             return true;
         }
-        Session session = cluster.connect("instagrim");
+        Session session = cluster.connect("instagrimmjb");
         PreparedStatement ps = session.prepare("select login from userprofiles where login =?");
         ResultSet rs = null;
         BoundStatement boundStatement = new BoundStatement(ps);

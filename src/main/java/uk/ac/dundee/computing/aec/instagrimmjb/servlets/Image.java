@@ -1,4 +1,4 @@
-package uk.ac.dundee.computing.aec.instagrim.servlets;
+package uk.ac.dundee.computing.aec.instagrimmjb.servlets;
 
 import com.datastax.driver.core.Cluster;
 import java.io.BufferedInputStream;
@@ -23,12 +23,12 @@ import org.apache.commons.fileupload.FileItemIterator;
 import org.apache.commons.fileupload.FileItemStream;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import org.apache.commons.fileupload.util.Streams;
-import uk.ac.dundee.computing.aec.instagrim.lib.CassandraHosts;
-import uk.ac.dundee.computing.aec.instagrim.lib.Convertors;
-import uk.ac.dundee.computing.aec.instagrim.models.PicModel;
-import uk.ac.dundee.computing.aec.instagrim.stores.LoggedIn;
-import uk.ac.dundee.computing.aec.instagrim.stores.Pic;
-import uk.ac.dundee.computing.aec.instagrim.models.UserModel;
+import uk.ac.dundee.computing.aec.instagrimmjb.lib.CassandraHosts;
+import uk.ac.dundee.computing.aec.instagrimmjb.lib.Convertors;
+import uk.ac.dundee.computing.aec.instagrimmjb.models.PicModel;
+import uk.ac.dundee.computing.aec.instagrimmjb.stores.LoggedIn;
+import uk.ac.dundee.computing.aec.instagrimmjb.stores.Pic;
+import uk.ac.dundee.computing.aec.instagrimmjb.models.UserModel;
 
 /**
  * Servlet implementation class Image
@@ -78,7 +78,7 @@ public class Image extends HttpServlet {
      * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
      */
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String args[] = Convertors.SplitRequestPath(request); // gets URL and splits it up where the obliques/ are. Instagrim = args[0], Images = [1], User = args[2]
+        String args[] = Convertors.SplitRequestPath(request); // gets URL and splits it up where the obliques/ are. instagrimmjb = args[0], Images = [1], User = args[2]
         int command;
         try {
             command = (Integer) CommandsMap.get(args[1]);
@@ -177,7 +177,7 @@ public class Image extends HttpServlet {
 
                 is.close();
             }
-            RequestDispatcher rd = request.getRequestDispatcher("upload.jsp");
+            RequestDispatcher rd = request.getRequestDispatcher("/upload.jsp");
             rd.forward(request, response);
         }
 
