@@ -18,8 +18,9 @@
             <h2>Your world in Black and White</h2>
         </header>
 
-<h3><font color = "red">Sorry, something went wrong! Please navigate to another page using the links displayed on this page.</font></h3>
-              
+<h3><font color = "red">Sorry, that page wasn't found!
+    <br>Please navigate to another page using the links displayed on this page.</font></br></h3>   
 <ul>
                 <li class="footer"><a href="/instagrimmjb">Home</a></li>
+                <li class="nav"><a href="/instagrimmjb/Random">Random Image</a></li>
             </ul>

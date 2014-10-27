@@ -65,7 +65,8 @@ public class Login extends HttpServlet
             
                 HttpSession session=request.getSession();
                 System.out.println("Session in servlet "+session);
-
+            if (isValid)
+            {
                 LoggedIn lg = new LoggedIn();
                 lg.setLoggedIn();
                 lg.setUsername(username);
@@ -78,14 +79,21 @@ public class Login extends HttpServlet
                 request.setAttribute("message", message);
                 RequestDispatcher rd = request.getRequestDispatcher("index.jsp");
                 rd.forward(request, response);
+            }
+            else
+            {
+                errorMsg = "Username and/or password are invalid. Please try again or register as a new user."; 
+                request.setAttribute("errorMsg", errorMsg);
+                RequestDispatcher rd = request.getRequestDispatcher("/login.jsp");
+                rd.forward(request, response);
+            }
            
-             
         }
         else
         {
-            errorMsg = "Username and/or password were incorrect. Please try again or register as a new user."; 
+            errorMsg = "Username and/or password were left blank. Please try again or register as a new user."; 
             request.setAttribute("errorMsg", errorMsg);
-            RequestDispatcher rd = request.getRequestDispatcher("login.jsp");
+            RequestDispatcher rd = request.getRequestDispatcher("/login.jsp");
             rd.forward(request, response);
         }
     }

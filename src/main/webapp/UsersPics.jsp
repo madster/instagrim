@@ -29,7 +29,7 @@
         </nav>
  
         <article>
-            <h1>${User.get(2)}'s Pics</h1>
+            <h1>${User}'s Pics</h1>
             
             <%
             LinkedList<Pic> lsPics = (LinkedList<Pic>) request.getAttribute("Pics");

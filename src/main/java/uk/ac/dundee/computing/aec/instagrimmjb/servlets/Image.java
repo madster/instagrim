@@ -104,15 +104,17 @@ public class Image extends HttpServlet {
         }
     }
 
-    private void DisplayImageList(String User, HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+     private void DisplayImageList(String User, HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException 
+     {
         PicModel tm = new PicModel();
         tm.setCluster(cluster);
         LinkedList<Pic> lsPics = tm.getPicsForUser(User);
         RequestDispatcher rd = request.getRequestDispatcher("/UsersPics.jsp");
         request.setAttribute("Pics", lsPics);
+        request.setAttribute("User", User);
         rd.forward(request, response);
 
-    }
+     }
 
     private void DisplayImage(int type,String Image, HttpServletResponse response) throws ServletException, IOException 
     {
